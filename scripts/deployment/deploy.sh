@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Останавливаем и удаляем старые контейнеры
-docker-compose down
+docker compose down
 
 # Собираем новые образы
-docker-compose build
+docker compose build
 
 # Запускаем контейнеры
-docker-compose up -d
+docker compose up -d
 
 echo "Развертывание завершено!"
 
