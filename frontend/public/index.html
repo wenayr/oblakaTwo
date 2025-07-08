@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облака AI - Умный ассистент</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <h1>Облака AI</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <i class="fas fa-circle"></i>
+                <span>Подключение...</span>
+            </div>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Панель выбора модели -->
+            <div class="model-selector">
+                <label for="modelSelect">Выберите AI модель:</label>
+                <select id="modelSelect">
+                    <option value="openai">OpenAI GPT-3.5</option>
+                    <option value="gemini">Google Gemini</option>
+                </select>
+                <div class="model-info" id="modelInfo">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Загрузка информации о моделях...</span>
+                </div>
+            </div>
+
+            <!-- Область чата -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h2>Добро пожаловать в Облака AI!</h2>
+                        <p>Я ваш умный ассистент. Задайте любой вопрос, и я помогу вам найти ответ.</p>
+                        <div class="example-questions">
+                            <h3>Примеры вопросов:</h3>
+                            <div class="example-item" onclick="sendExampleQuestion('Расскажи о последних новостях в области ИИ')">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Расскажи о последних новостях в области ИИ</span>
+                            </div>
+                            <div class="example-item" onclick="sendExampleQuestion('Помоги написать план презентации')">
+                                <i class="fas fa-presentation"></i>
+                                <span>Помоги написать план презентации</span>
+                            </div>
+                            <div class="example-item" onclick="sendExampleQuestion('Объясни сложную тему простыми словами')">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Объясни сложную тему простыми словами</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Форма ввода -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Введите ваш вопрос..."
+                            rows="1"
+                        ></textarea>
+                        <button id="sendButton" type="button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <div class="settings">
+                            <label>
+                                <input type="range" id="temperatureSlider" min="0" max="1" step="0.1" value="0.7">
+                                <span>Креативность: <span id="temperatureValue">0.7</span></span>
+                            </label>
+                        </div>
+                        <div class="word-count">
+                            <span id="wordCount">0 символов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Боковая панель с информацией -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-chart-line"></i> Статистика</h3>
+                <div class="stat-item">
+                    <span>Сообщений отправлено:</span>
+                    <span id="messageCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Токенов использовано:</span>
+                    <span id="tokenCount">0</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-cogs"></i> Настройки</h3>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="autoScroll" checked>
+                        Автопрокрутка
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="soundEnabled">
+                        Звуковые уведомления
+                    </label>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><i class="fas fa-history"></i> Быстрые действия</h3>
+                <button class="action-button" onclick="clearChat()">
+                    <i class="fas fa-trash"></i>
+                    Очистить чат
+                </button>
+                <button class="action-button" onclick="exportChat()">
+                    <i class="fas fa-download"></i>
+                    Экспорт чата
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Модальное окно загрузки -->
+    <div class="loading-modal" id="loadingModal">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>AI обрабатывает ваш запрос...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
